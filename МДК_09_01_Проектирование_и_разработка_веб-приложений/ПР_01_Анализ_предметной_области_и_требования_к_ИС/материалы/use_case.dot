@@ -1,0 +1,27 @@
+digraph UC {
+  rankdir=LR; bgcolor="white"; pad=0.3; nodesep=0.22; ranksep=1.1;
+  node [fontname="DejaVu Sans", fontsize=12];
+  edge [color="#5D5873", arrowhead=none, penwidth=1.1];
+  guest [shape=none, label=<<table border="0"><tr><td><font point-size="30">☺</font></td></tr><tr><td><b>Гость</b></td></tr></table>>];
+  vol   [shape=none, label=<<table border="0"><tr><td><font point-size="30">☺</font></td></tr><tr><td><b>Волонтёр</b></td></tr></table>>];
+  coord [shape=none, label=<<table border="0"><tr><td><font point-size="30">☺</font></td></tr><tr><td><b>Координатор</b></td></tr></table>>];
+  subgraph cluster_sys {
+    label=<<b>Портал «Добрый город»</b>>; fontname="DejaVu Sans"; fontsize=15; color="#4B2BB5"; penwidth=1.6; style="rounded"; margin=16;
+    node [shape=ellipse, style=filled, fillcolor="#EEE9FB", color="#4B2BB5", width=2.9];
+    u1 [label="Просмотр предстоящих акций\nи фильтр по направлению"];
+    u2 [label="Просмотр страницы акции"];
+    u3 [label="Регистрация"];
+    u4 [label="Вход / выход"];
+    u5 [label="Запись на акцию\n(выбор задачи)", fillcolor="#FFF2C7", color="#C99A1A"];
+    u6 [label="Просмотр своих заявок\nи их статусов", fillcolor="#FFF2C7", color="#C99A1A"];
+    u7 [label="Отмена новой заявки", fillcolor="#FFF2C7", color="#C99A1A"];
+    u8 [label="Отзыв после завершения\nакции", fillcolor="#FFF2C7", color="#C99A1A"];
+    u9 [label="Просмотр всех заявок\nс фильтром по статусу", fillcolor="#DDF3EA", color="#1FA67A"];
+    u10 [label="Смена статуса заявки\nНовая → Назначено → Завершено", fillcolor="#DDF3EA", color="#1FA67A"];
+    u11 [label="Управление акциями\n(создание, изменение, удаление)", fillcolor="#DDF3EA", color="#1FA67A"];
+  }
+  guest -> {u1 u2 u3 u4};
+  vol -> {u4 u5 u6 u7 u8};
+  coord -> {u4 u9 u10 u11};
+  vol -> guest [arrowhead=empty, style=dashed, constraint=false, label=" наследует", fontname="DejaVu Sans", fontsize=10];
+}

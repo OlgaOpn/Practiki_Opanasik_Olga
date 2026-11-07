@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.db
+.venv/
+tests/results.csv
+server.log
+mysql_check_result.txt

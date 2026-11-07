@@ -1,0 +1,8 @@
+digraph S { rankdir=TB; bgcolor=white; pad=0.3; nodesep=0.5; ranksep=0.45; node [fontname="DejaVu Sans", fontsize=13, shape=box, style="rounded,filled", penwidth=1.4];
+ edge [fontname="DejaVu Sans", fontsize=11, color="#5D5873"];
+ start [shape=circle, label="", width=0.22, fillcolor="#1E1B2E"];
+ n [label="Новая", fillcolor="#FFF2C7", color="#C99A1A"]; a [label="Назначено", fillcolor="#EEE9FB", color="#4B2BB5"]; d [label="Завершено", fillcolor="#DDF3EA", color="#1FA67A"];
+ x [label="Отменена\n(запись удаляется)", fillcolor="#FFE1DC", color="#FF6F59"]; r [label="Отзыв\n(1 раз, оценка 1–5)", fillcolor="white", color="#2A1873", style="rounded,dashed"];
+ start -> n [label=" волонтёр записался"]; n -> a [label=" координатор\n назначил"]; a -> d [label=" координатор, после\n даты акции"];
+ n -> x [label=" волонтёр\n отменил"]; d -> r [label=" волонтёр", style=dashed];
+}
