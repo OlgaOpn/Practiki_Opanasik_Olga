@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Запись на акцию — Добрый город{% endblock %}
+{% block content %}
+<form method="post" class="panel panel--narrow" novalidate data-validate>
+  <h1>Запись на акцию</h1>
+  <p class="muted">Координатор подтвердит заявку и напишет вам на почту.</p>
+  <input type="hidden" name="csrf_token" value="{{ csrf }}">
+  <div class="field{% if errors.action_id %} field--error{% endif %}">
+    <label for="action_id">Акция</label>
+    <select id="action_id" name="action_id">
+      <option value="">Выберите акцию</option>
+      {% for a in actions %}<option value="{{ a.id }}" {% if a.id|string == data.action_id|string %}selected{% endif %}>{{ a.action_date|full_date }} — {{ a.title }}</option>{% endfor %}
+    </select>
+    <span class="field__err" role="alert">{{ errors.get('action_id', '') }}</span>
+  </div>
+  <fieldset class="field{% if errors.task %} field--error{% endif %}">
+    <legend>Чем хотите помочь</legend>
+    <div class="tiles">
+      {% for t in tasks %}<label class="tile"><input type="radio" name="task" value="{{ t }}" {% if t == data.task %}checked{% endif %}><span>{{ t }}</span></label>{% endfor %}
+    </div>
+    <span class="field__err" role="alert">{{ errors.get('task', '') }}</span>
+  </fieldset>
+  <div class="field{% if errors.comment %} field--error{% endif %}">
+    <label for="comment">Комментарий <span class="muted">(необязательно)</span></label>
+    <textarea id="comment" name="comment" maxlength="400" placeholder="Например: есть машина, могу привезти инструменты">{{ data.get('comment', '') }}</textarea>
+    <span class="field__err" role="alert">{{ errors.get('comment', '') }}</span>
+  </div>
+  <div class="form-foot"><button class="btn" type="submit">Отправить заявку</button><a class="muted" href="/cabinet">Отмена</a></div>
+</form>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF8F3">
+  <title>{% block title %}Добрый город — волонтёрские акции Москвы{% endblock %}</title>
+  <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/static/fonts/inter-400.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="/static/dist/app.min.css?v={{ ASSET_VERSION }}">
+</head>
+<body>
+{% set path = request.url.path %}
+<header class="top">
+  <div class="wrap top__row">
+    <a class="logo" href="/"><img src="/static/img/logo.svg" alt="" width="40" height="40"><div><b>Добрый город</b><span>волонтёрские акции Москвы</span></div></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/" {% if path == '/' %}aria-current="page"{% endif %}>Акции</a>
+      {% if user and user.role == 'coordinator' %}
+        <a href="/coordinator" {% if path == '/coordinator' %}aria-current="page"{% endif %}>Заявки</a>
+        <a href="/coordinator/actions" {% if path.startswith('/coordinator/actions') %}aria-current="page"{% endif %}>Управление акциями</a>
+      {% elif user %}
+        <a href="/cabinet" {% if path == '/cabinet' %}aria-current="page"{% endif %}>Личный кабинет</a>
+        <a href="/signup" {% if path == '/signup' %}aria-current="page"{% endif %}>Записаться</a>
+      {% endif %}
+      {% if user %}
+        <div class="nav__user">
+          <span class="avatar" title="{{ user.full_name }}">{{ user|initials }}</span>
+          <form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button type="submit">Выйти</button></form>
+        </div>
+      {% else %}
+        <a href="/login" {% if path == '/login' %}aria-current="page"{% endif %}>Вход</a>
+        <a class="btn btn--sun btn--sm" href="/register">Стать волонтёром</a>
+      {% endif %}
+    </nav>
+    {% if not user %}<a class="btn btn--sun btn--sm top__login" href="/login">Войти</a>{% endif %}
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    {% for kind, text in flashes %}<p class="toast toast--{{ kind }}" role="status">{{ text }}</p>{% endfor %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <div><b>Добрый город</b><br>Помогаем вместе — по выходным и после работы.</div>
+    <div>Учебный проект · 2026</div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="Меню для смартфона">
+  <a href="/" {% if path == '/' %}aria-current="page"{% endif %}>{% include "icons/nav-home.svg" %}Акции</a>
+  {% if user and user.role == 'coordinator' %}
+    <a href="/coordinator" {% if path == '/coordinator' %}aria-current="page"{% endif %}>{% include "icons/nav-list.svg" %}Заявки</a>
+    <a href="/coordinator/actions" {% if path.startswith('/coordinator/actions') %}aria-current="page"{% endif %}>{% include "icons/nav-cal.svg" %}Акции+</a>
+  {% elif user %}
+    <a href="/cabinet" {% if path == '/cabinet' %}aria-current="page"{% endif %}>{% include "icons/nav-user.svg" %}Кабинет</a>
+    <a href="/signup" {% if path == '/signup' %}aria-current="page"{% endif %}>{% include "icons/nav-plus.svg" %}Записаться</a>
+  {% endif %}
+  {% if user %}
+    <form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button type="submit">{% include "icons/nav-out.svg" %}Выйти</button></form>
+  {% else %}
+    <a href="/register" {% if path == '/register' %}aria-current="page"{% endif %}>{% include "icons/nav-plus.svg" %}Регистрация</a>
+    <a href="/login" {% if path == '/login' %}aria-current="page"{% endif %}>{% include "icons/nav-user.svg" %}Вход</a>
+  {% endif %}
+</nav>
+<script src="/static/dist/app.min.js?v={{ ASSET_VERSION }}" defer></script>
+</body>
+</html>

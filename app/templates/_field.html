@@ -1,0 +1,9 @@
+{% macro field(name, label, data, errors, type='text', hint='', placeholder='', autocomplete='off', cls='') %}
+<div class="field{% if errors.get(name) %} field--error{% endif %} {{ cls }}">
+  <label for="{{ name }}">{{ label }}</label>
+  <input id="{{ name }}" name="{{ name }}" type="{{ type }}" value="{{ data.get(name, '') if type != 'password' else '' }}"
+         placeholder="{{ placeholder }}" autocomplete="{{ autocomplete }}" aria-describedby="{{ name }}-err">
+  {% if hint %}<small>{{ hint }}</small>{% endif %}
+  <span class="field__err" id="{{ name }}-err" role="alert">{{ errors.get(name, '') }}</span>
+</div>
+{% endmacro %}

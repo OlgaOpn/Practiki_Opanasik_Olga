@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "_macros.html" import date_badge, steps, meter, csrf_input %}
+{% block title %}Управление акциями — Добрый город{% endblock %}
+{% block content %}
+<div class="section-head"><h1>Управление акциями</h1><a class="btn btn--sun btn--sm" href="/coordinator/actions/new">+ Новая акция</a></div>
+<div class="table-wrap">
+<table class="table">
+  <thead><tr><th>Дата</th><th>Акция</th><th>Направление</th><th>Заявок</th><th></th></tr></thead>
+  <tbody>
+  {% for a in items %}
+  <tr>
+    <td>{{ a.action_date|full_date }}</td>
+    <td><a href="/actions/{{ a.id }}">{{ a.title }}</a></td>
+    <td><span class="badge cat-{{ cat_class(a.category) }}">{{ a.category }}</span></td>
+    <td>{{ a.taken }} / {{ a.needed }}</td>
+    <td><div class="row-actions">
+      <a class="btn btn--ghost btn--sm" href="/coordinator/actions/{{ a.id }}/edit">Изменить</a>
+      <form method="post" action="/coordinator/actions/{{ a.id }}/delete" data-confirm="Удалить акцию «{{ a.title }}» вместе с заявками?">
+        {{ csrf_input(csrf) }}<button class="btn btn--danger btn--sm" type="submit">Удалить</button>
+      </form>
+    </div></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

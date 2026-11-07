@@ -1,0 +1,21 @@
+{# карточка акции; ожидает переменную a (акция с полем taken) #}
+{% from "_macros.html" import date_badge, steps, meter, csrf_input %}
+<article class="card">
+  <div class="card__band cat-{{ cat_class(a.category) }}">
+    <span class="card__cat">{% include "icons/cat-" ~ cat_class(a.category) ~ ".svg" %}{{ a.category }}</span>
+    {{ date_badge(a.action_date) }}
+  </div>
+  <div class="card__body">
+    <h3><a href="/actions/{{ a.id }}">{{ a.title }}</a></h3>
+    <p class="place">{% include "icons/pin.svg" %}{{ a.place }}</p>
+    <p class="card__text">{{ a.description|truncate(120) }}</p>
+    <div class="card__foot">
+      {{ meter(a.taken, a.needed) }}
+      {% if a.taken >= a.needed %}
+        <span class="btn btn--ghost btn--block" aria-disabled="true">Набор закрыт</span>
+      {% else %}
+        <a class="btn btn--block" href="/signup?action={{ a.id }}">Хочу помочь</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

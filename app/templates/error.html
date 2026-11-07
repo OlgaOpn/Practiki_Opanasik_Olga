@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Ошибка {{ code }} — Добрый город{% endblock %}
+{% block content %}
+<div class="err-page panel"><b>{{ code }}</b><h2>{{ message }}</h2><p class="muted">Проверьте адрес или вернитесь на главную.</p><a class="btn" href="/">На главную</a></div>
+{% endblock %}

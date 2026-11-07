@@ -1,0 +1,14 @@
+{# Повторяющиеся элементы интерфейса (вынесены в ПР 15, раньше дублировались в нескольких шаблонах) #}
+{% macro date_badge(d) %}<span class="date"><b>{{ d|day }}</b><span>{{ d|mon }}</span></span>{% endmacro %}
+
+{% macro steps(status_id, status) %}
+<ol class="steps" aria-label="Статус заявки: {{ status }}">
+  {% for name in ['Новая', 'Назначено', 'Завершено'] %}<li class="{{ 'done' if status_id >= loop.index }}">{{ name }}</li>{% endfor %}
+</ol>
+{% endmacro %}
+
+{% macro meter(taken, needed) %}
+<label class="meter">Записалось {{ taken }} из {{ needed }}<progress max="{{ needed }}" value="{{ taken }}"></progress></label>
+{% endmacro %}
+
+{% macro csrf_input(csrf) %}<input type="hidden" name="csrf_token" value="{{ csrf }}">{% endmacro %}
