@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ a.title }} — Добрый город{% endblock %}
+{% block content %}
+<div class="detail">
+  <article class="panel">
+    <span class="badge cat-{{ cat_class(a.category) }}">{{ a.category }}</span>
+    <h1>{{ a.title }}</h1>
+    <p class="place">{% include "icons/pin.svg" %}{{ a.place }}</p>
+    <p>{{ a.description }}</p>
+  </article>
+  <aside class="panel detail__aside">
+    <ul class="facts">
+      <li><span>Дата</span><b>{{ a.action_date|full_date }}</b></li>
+      <li><span>Направление</span><b>{{ a.category }}</b></li>
+      <li><span>Нужно волонтёров</span><b>{{ a.needed }}</b></li>
+    </ul>
+    <label class="meter">Записалось {{ taken }} из {{ a.needed }}<progress max="{{ a.needed }}" value="{{ taken }}"></progress></label>
+    <p></p>
+    {% if a.action_date < today %}
+      <p class="muted">Акция уже прошла.</p>
+    {% elif taken >= a.needed %}
+      <p class="muted">Набор волонтёров закрыт.</p>
+    {% else %}
+      <a class="btn btn--block" href="/signup?action={{ a.id }}">Хочу помочь</a>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

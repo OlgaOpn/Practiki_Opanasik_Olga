@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Вход — Добрый город{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="auth__art">
+    <div><h2>С возвращением!</h2><p>Войдите, чтобы записаться на акцию или посмотреть статус своих заявок.</p></div>
+    <img src="/static/img/hero.svg" alt="" width="520" height="380">
+  </div>
+  <form method="post" class="auth__form">
+    <h1>Вход</h1>
+    {% if error %}<p class="toast toast--error" role="alert">{{ error }}</p>{% endif %}
+    <input type="hidden" name="csrf_token" value="{{ csrf }}">
+    <div class="field"><label for="login">Логин</label><input id="login" name="login" value="{{ login_value }}" required autocomplete="username"></div>
+    <div class="field"><label for="password">Пароль</label><input id="password" name="password" type="password" required autocomplete="current-password"></div>
+    <div class="form-foot"><button class="btn" type="submit">Войти</button><span class="muted">Нет аккаунта? <a href="/register">Регистрация</a></span></div>
+  </form>
+</div>
+{% endblock %}

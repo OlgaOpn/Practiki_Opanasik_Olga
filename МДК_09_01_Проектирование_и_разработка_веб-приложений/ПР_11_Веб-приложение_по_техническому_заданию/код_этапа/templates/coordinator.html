@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Заявки — Добрый город{% endblock %}
+{% block content %}
+<div class="section-head"><h1>Заявки волонтёров</h1><a class="btn btn--ghost btn--sm" href="/coordinator/actions">Управление акциями</a></div>
+<nav class="tiles-stats" aria-label="Фильтр по статусу">
+  <a class="stat stat--0 {% if not current %}is-active{% endif %}" href="/coordinator"><b>{{ total }}</b><span>Все заявки</span></a>
+  {% for st in statuses %}
+  <a class="stat stat--{{ st.id }} {% if current == st.id %}is-active{% endif %}" href="/coordinator?status={{ st.id }}"><b>{{ counts[st.id] }}</b><span>{{ st.name }}</span></a>
+  {% endfor %}
+</nav>
+{% if items %}
+<div class="list">
+  {% for s in items %}
+  <article class="ticket">
+    <span class="date"><b>{{ s.action_date|day }}</b><span>{{ s.action_date|mon }}</span></span>
+    <div>
+      <h3>{{ s.full_name }}</h3>
+      <p class="contact">{{ s.phone }} · {{ s.email }}</p>
+      <p class="ticket__meta"><span>{{ s.title }}</span><span>Задача: {{ s.task }}</span><span>№ {{ s.id }}</span></p>
+      {% if s.comment %}<p class="muted">«{{ s.comment }}»</p>{% endif %}
+      <ol class="steps" aria-label="Статус: {{ s.status }}">
+        <li class="{{ 'done' if s.status_id >= 1 }}">Новая</li><li class="{{ 'done' if s.status_id >= 2 }}">Назначено</li><li class="{{ 'done' if s.status_id >= 3 }}">Завершено</li>
+      </ol>
+    </div>
+    <div class="ticket__side">
+      <span class="badge st-{{ s.status_id }}">{{ s.status }}</span>
+      {% if s.status_id < 3 %}
+      <form method="post" action="/coordinator/status">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="signup_id" value="{{ s.id }}">
+        <input type="hidden" name="status_id" value="{{ s.status_id + 1 }}"><input type="hidden" name="back" value="{{ current or '' }}">
+        <button class="btn btn--sm {{ 'btn--sun' if s.status_id == 2 }}" type="submit">{{ 'Назначить' if s.status_id == 1 else 'Завершить' }}</button>
+      </form>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty panel"><img src="/static/img/empty.svg" alt=""><p>Заявок с таким статусом нет.</p></div>
+{% endif %}
+{% endblock %}

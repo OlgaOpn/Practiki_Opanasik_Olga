@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 380" role="img" aria-label="Люди вместе помогают городу">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE7FF"/><stop offset="1" stop-color="#FBF8F3"/></linearGradient>
+  </defs>
+  <path d="M40 210C20 120 90 30 210 30c80 0 110 40 190 40 70 0 110 60 100 140-12 100-110 150-240 150S60 300 40 210z" fill="url(#sky)"/>
+  <circle cx="400" cy="92" r="34" fill="#FFC93C"/>
+  <g fill="#C9BCF7">
+    <rect x="70" y="190" width="54" height="130" rx="6"/><rect x="132" y="150" width="62" height="170" rx="6"/>
+    <rect x="330" y="170" width="58" height="150" rx="6"/><rect x="396" y="205" width="52" height="115" rx="6"/>
+  </g>
+  <g fill="#FBF8F3">
+    <rect x="84" y="208" width="10" height="12" rx="2"/><rect x="102" y="208" width="10" height="12" rx="2"/><rect x="84" y="232" width="10" height="12" rx="2"/>
+    <rect x="148" y="170" width="11" height="13" rx="2"/><rect x="168" y="170" width="11" height="13" rx="2"/><rect x="148" y="196" width="11" height="13" rx="2"/><rect x="168" y="222" width="11" height="13" rx="2"/>
+    <rect x="344" y="190" width="11" height="13" rx="2"/><rect x="364" y="190" width="11" height="13" rx="2"/><rect x="364" y="216" width="11" height="13" rx="2"/>
+    <rect x="408" y="224" width="10" height="12" rx="2"/><rect x="426" y="248" width="10" height="12" rx="2"/>
+  </g>
+  <path d="M30 320h460" stroke="#2A1873" stroke-width="4" stroke-linecap="round"/>
+  <!-- дерево -->
+  <rect x="455" y="268" width="8" height="52" rx="3" fill="#7A5230"/>
+  <circle cx="459" cy="258" r="26" fill="#1FA67A"/><circle cx="444" cy="270" r="16" fill="#25B887"/>
+  <!-- человек 1 с саженцем -->
+  <g>
+    <circle cx="214" cy="200" r="16" fill="#F2C29B"/>
+    <path d="M198 194c2-14 30-16 32 0-8-6-24-6-32 0z" fill="#2A1873"/>
+    <path d="M192 320l6-70c2-20 30-20 32 0l6 70z" fill="#FF6F59"/>
+    <path d="M200 252l-22 26M228 252l20 22" stroke="#F2C29B" stroke-width="9" stroke-linecap="round"/>
+    <path d="M248 275v-22" stroke="#1FA67A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M248 258c-10 0-14-8-12-14 8 0 12 6 12 14zM248 262c8-2 14-10 10-16-8 2-11 8-10 16z" fill="#1FA67A"/>
+  </g>
+  <!-- человек 2 с коробкой -->
+  <g>
+    <circle cx="296" cy="214" r="15" fill="#C98B62"/>
+    <path d="M281 210c0-16 30-18 30 0-4-4-26-4-30 0z" fill="#1E1B2E"/>
+    <path d="M276 320l4-62c2-18 30-18 32 0l4 62z" fill="#4B2BB5"/>
+    <rect x="262" y="258" width="44" height="34" rx="4" fill="#FFC93C"/>
+    <path d="M262 270h44" stroke="#E0A800" stroke-width="3"/>
+    <path d="M276 274c0-4 6-6 8-2 2-4 8-2 8 2 0 5-8 9-8 9s-8-4-8-9z" fill="#FF6F59"/>
+  </g>
+  <!-- сердечки -->
+  <path d="M120 96c0-8 12-12 16-4 4-8 16-4 16 4 0 11-16 20-16 20s-16-9-16-20z" fill="#FF6F59"/>
+  <path d="M262 86c0-5 8-8 10-3 2-5 10-2 10 3 0 7-10 13-10 13s-10-6-10-13z" fill="#FFC93C"/>
+  <path d="M470 150c0-5 7-7 9-2 2-5 9-3 9 2 0 6-9 11-9 11s-9-5-9-11z" fill="#7A5AF8"/>
+</svg>

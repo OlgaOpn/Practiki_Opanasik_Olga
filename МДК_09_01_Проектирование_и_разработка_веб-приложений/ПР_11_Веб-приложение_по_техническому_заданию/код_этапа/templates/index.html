@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="hero__kicker">✦ Волонтёрство рядом с домом</span>
+    <h1>Делать город лучше — <em class="accent">проще, чем кажется</em></h1>
+    <p>Субботники, помощь приютам, праздники для детей и пожилых. Выберите акцию, запишитесь в пару кликов — координатор свяжется с вами.</p>
+    <div class="hero__cta">
+      {% if not user %}<a class="btn btn--sun" href="/register">Стать волонтёром</a>{% endif %}
+      <a class="btn btn--ghost" href="#actions">Смотреть акции</a>
+    </div>
+    <ul class="stats">
+      <li><b>{{ actions|length }}</b><span>ближайших акций</span></li>
+      <li><b>{{ volunteers }}</b><span>волонтёров с нами</span></li>
+      <li><b>5</b><span>направлений помощи</span></li>
+    </ul>
+  </div>
+  <img class="hero__art" src="/static/img/hero.svg" alt="Волонтёры сажают дерево и несут коробку с помощью" width="520" height="380">
+</section>
+
+<section id="actions">
+  <div class="section-head">
+    <h2>Ближайшие акции</h2>
+    <ul class="chips" aria-label="Направления">
+      <li><a class="chip {% if not category %}is-active{% endif %}" href="/#actions">Все</a></li>
+      {% for c in categories %}
+      <li><a class="chip {% if category == c %}is-active{% endif %}" href="/?category={{ c|urlencode }}#actions">{% include "icons/cat-" ~ cat_class(c) ~ ".svg" %}{{ c }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% if actions %}
+  <div class="grid">
+    {% for a in actions %}{% set taken = counts[a.id] %}{% include "_action_card.html" %}{% endfor %}
+  </div>
+  {% else %}
+  <div class="empty"><img src="/static/img/empty.svg" alt=""><p>По этому направлению акций пока нет.</p></div>
+  {% endif %}
+</section>
+
+{% if reviews %}
+<section class="quotes" aria-label="Отзывы волонтёров">
+  {% for r in reviews %}
+  <blockquote class="quote">
+    <span class="stars" aria-label="Оценка {{ r.rating }} из 5">{{ '★' * r.rating }}{{ '☆' * (5 - r.rating) }}</span>
+    <p>«{{ r.body }}»</p>
+    <footer>{{ r.full_name }} · {{ r.title }}</footer>
+  </blockquote>
+  {% endfor %}
+</section>
+{% endif %}
+{% endblock %}

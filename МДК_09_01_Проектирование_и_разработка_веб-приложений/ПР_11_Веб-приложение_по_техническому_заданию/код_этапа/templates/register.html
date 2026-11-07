@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "_field.html" import field %}
+{% block title %}Регистрация — Добрый город{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="auth__art">
+    <div><h2>Присоединяйтесь <em class="accent">к доброй команде</em></h2>
+    <p>После регистрации вы сможете записываться на акции, следить за статусом заявок и оставлять отзывы.</p></div>
+    <img src="/static/img/hero.svg" alt="" width="520" height="380">
+  </div>
+  <form method="post" class="auth__form" novalidate data-validate>
+    <h1>Регистрация</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf }}">
+    <div class="form-grid">
+      {{ field('full_name', 'Фамилия и имя', data, errors, placeholder='Иванова Мария', autocomplete='name', cls='span-2') }}
+      {{ field('login', 'Логин', data, errors, hint='3–24 символа: латиница, цифры, . _ -', autocomplete='username') }}
+      {{ field('phone', 'Телефон', data, errors, type='tel', placeholder='+7 (999) 123-45-67', autocomplete='tel') }}
+      {{ field('email', 'Электронная почта', data, errors, type='email', placeholder='name@mail.ru', autocomplete='email', cls='span-2') }}
+      {{ field('password', 'Пароль', data, errors, type='password', hint='от 8 символов, буквы и цифры', autocomplete='new-password') }}
+      {{ field('password2', 'Повторите пароль', data, errors, type='password', autocomplete='new-password') }}
+    </div>
+    <div class="form-foot"><button class="btn" type="submit">Зарегистрироваться</button><span class="muted">Уже с нами? <a href="/login">Войти</a></span></div>
+  </form>
+</div>
+{% endblock %}
