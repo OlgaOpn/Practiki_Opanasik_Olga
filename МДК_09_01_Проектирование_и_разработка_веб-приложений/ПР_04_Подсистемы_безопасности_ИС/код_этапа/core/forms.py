@@ -1,21 +1,15 @@
-"""Проверка данных форм на сервере (pydantic).
-
-Те же правила продублированы в static/js/forms.js — для мгновенной подсказки
-в браузере. Решение принимает только сервер.
-"""
 import re
 
 from pydantic import BaseModel, ValidationError, field_validator, model_validator
 
 LOGIN_RE = re.compile(r"^[A-Za-z0-9._-]{3,24}$")
-NAME_RE = re.compile(r"^[А-ЯЁа-яё]+(?:[ -][А-ЯЁа-яё]+)+$")      # минимум два слова
+NAME_RE = re.compile(r"^[А-ЯЁа-яё]+(?:[ -][А-ЯЁа-яё]+)+$")
 PHONE_RE = re.compile(r"^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[A-Za-zА-Яа-я]{2,}$")
 TASKS = ["Работа на площадке", "Встреча и регистрация участников", "Фото и соцсети", "Логистика и доставка"]
 
 
 def clean(value: str) -> str:
-    """Убирает пробелы по краям и повторяющиеся пробелы внутри."""
     return re.sub(r"\s+", " ", value or "").strip()
 
 
@@ -99,7 +93,6 @@ class SignupForm(BaseModel):
 
 
 def validate(model, data: dict):
-    """Возвращает (объект, {}) или (None, {поле: сообщение})."""
     try:
         return model(**data), {}
     except ValidationError as exc:

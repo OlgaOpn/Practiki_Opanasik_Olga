@@ -1,4 +1,3 @@
-{# карточка акции; ожидает переменные a (акция) и taken (сколько уже записалось) #}
 <article class="card">
   <div class="card__band cat-{{ cat_class(a.category) }}">
     <span class="card__cat">{% include "icons/cat-" ~ cat_class(a.category) ~ ".svg" %}{{ a.category }}</span>

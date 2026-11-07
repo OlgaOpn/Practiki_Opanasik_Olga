@@ -4,4 +4,4 @@ jinja2>=3.1
 python-multipart>=0.0.9
 itsdangerous>=2.1
 pydantic>=2.6
-pymysql>=1.1        # нужен только при работе с MySQL (DATABASE_URL=mysql://...)
+pymysql>=1.1

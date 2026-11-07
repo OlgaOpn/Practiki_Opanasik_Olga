@@ -1,6 +1,5 @@
 <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
-  <!-- ПР 8: макет мобильной версии (390×844), статический HTML с демонстрационными данными -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FBF8F3">
   <title>Макет 390×844 · Заявки — Добрый город</title>
@@ -15,39 +14,37 @@
     <a class="logo" href="01_главная.html"><img src="assets/img/logo.svg" alt="" width="40" height="40"><div><b>Добрый город</b><span>волонтёрские акции Москвы</span></div></a>
     <nav class="nav" aria-label="Основное меню">
       <a href="01_главная.html">Акции</a>
-      
+
         <a href="08_заявки_координатор.html" aria-current="page">Заявки</a>
         <a href="09_управление_акциями.html">Управление акциями</a>
-      
-      
+
         <div class="nav__user">
           <span class="avatar" title="Координатор Добрый Город">Д</span>
           <form method="post" action="#"><input type="hidden" name="csrf_token" value=""><button type="submit">Выйти</button></form>
         </div>
-      
+
     </nav>
-    
+
   </div>
 </header>
 
 <main class="page">
   <div class="wrap">
-    
-    
+
 <div class="section-head"><h1>Заявки волонтёров</h1><a class="btn btn--ghost btn--sm" href="09_управление_акциями.html">Управление акциями</a></div>
 <nav class="tiles-stats" aria-label="Фильтр по статусу">
   <a class="stat stat--0 is-active" href="08_заявки_координатор.html"><b>6</b><span>Все заявки</span></a>
-  
+
   <a class="stat stat--1 " href="08_заявки_координатор.html"><b>2</b><span>Новая</span></a>
-  
+
   <a class="stat stat--2 " href="08_заявки_координатор.html"><b>1</b><span>Назначено</span></a>
-  
+
   <a class="stat stat--3 " href="08_заявки_координатор.html"><b>3</b><span>Завершено</span></a>
-  
+
 </nav>
 
 <div class="list">
-  
+
   <article class="ticket">
     <span class="date"><b>28</b><span>ноя</span></span>
     <div>
@@ -61,56 +58,56 @@
     </div>
     <div class="ticket__side">
       <span class="badge st-1">Новая</span>
-      
+
       <form method="post" action="#">
         <input type="hidden" name="csrf_token" value=""><input type="hidden" name="signup_id" value="6">
         <input type="hidden" name="status_id" value="2"><input type="hidden" name="back" value="">
         <button class="btn btn--sm " type="submit">Назначить</button>
       </form>
-      
+
     </div>
   </article>
-  
+
   <article class="ticket">
     <span class="date"><b>17</b><span>окт</span></span>
     <div>
       <h3>Карпова Елизавета</h3>
       <p class="contact">+7 (925) 610-09-44 · lisa.karpova@gmail.com</p>
       <p class="ticket__meta"><span>Субботник в Измайловском парке</span><span>Задача: Фото и соцсети</span><span>№ 5</span></p>
-      
+
       <ol class="steps" aria-label="Статус: Завершено">
         <li class="done">Новая</li><li class="done">Назначено</li><li class="done">Завершено</li>
       </ol>
     </div>
     <div class="ticket__side">
       <span class="badge st-3">Завершено</span>
-      
+
     </div>
   </article>
-  
+
   <article class="ticket">
     <span class="date"><b>9</b><span>янв</span></span>
     <div>
       <h3>Набиев Тимур</h3>
       <p class="contact">+7 (903) 227-64-81 · timur.nabiev@yandex.ru</p>
       <p class="ticket__meta"><span>Помощь на благотворительном забеге «5 км добра»</span><span>Задача: Встреча и регистрация участников</span><span>№ 4</span></p>
-      
+
       <ol class="steps" aria-label="Статус: Назначено">
         <li class="done">Новая</li><li class="done">Назначено</li><li class="">Завершено</li>
       </ol>
     </div>
     <div class="ticket__side">
       <span class="badge st-2">Назначено</span>
-      
+
       <form method="post" action="#">
         <input type="hidden" name="csrf_token" value=""><input type="hidden" name="signup_id" value="4">
         <input type="hidden" name="status_id" value="3"><input type="hidden" name="back" value="">
         <button class="btn btn--sm btn--sun" type="submit">Завершить</button>
       </form>
-      
+
     </div>
   </article>
-  
+
   <article class="ticket">
     <span class="date"><b>31</b><span>окт</span></span>
     <div>
@@ -124,10 +121,10 @@
     </div>
     <div class="ticket__side">
       <span class="badge st-3">Завершено</span>
-      
+
     </div>
   </article>
-  
+
   <article class="ticket">
     <span class="date"><b>21</b><span>ноя</span></span>
     <div>
@@ -141,35 +138,34 @@
     </div>
     <div class="ticket__side">
       <span class="badge st-1">Новая</span>
-      
+
       <form method="post" action="#">
         <input type="hidden" name="csrf_token" value=""><input type="hidden" name="signup_id" value="2">
         <input type="hidden" name="status_id" value="2"><input type="hidden" name="back" value="">
         <button class="btn btn--sm " type="submit">Назначить</button>
       </form>
-      
+
     </div>
   </article>
-  
+
   <article class="ticket">
     <span class="date"><b>17</b><span>окт</span></span>
     <div>
       <h3>Соколова Варвара</h3>
       <p class="contact">+7 (916) 482-15-30 · v.sokolova@mail.ru</p>
       <p class="ticket__meta"><span>Субботник в Измайловском парке</span><span>Задача: Работа на площадке</span><span>№ 1</span></p>
-      
+
       <ol class="steps" aria-label="Статус: Завершено">
         <li class="done">Новая</li><li class="done">Назначено</li><li class="done">Завершено</li>
       </ol>
     </div>
     <div class="ticket__side">
       <span class="badge st-3">Завершено</span>
-      
+
     </div>
   </article>
-  
-</div>
 
+</div>
 
   </div>
 </main>
@@ -183,13 +179,12 @@
 
 <nav class="tabbar" aria-label="Меню для смартфона">
   <a href="01_главная.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"></path></svg>Акции</a>
-  
+
     <a href="08_заявки_координатор.html" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg>Заявки</a>
     <a href="09_управление_акциями.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Акции+</a>
-  
-  
+
     <form method="post" action="#"><input type="hidden" name="csrf_token" value=""><button type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"></path><path d="M10 16l-4-4 4-4M6 12h10"></path></svg>Выйти</button></form>
-  
+
 </nav>
 <script src="assets/js/forms.js"></script>
 

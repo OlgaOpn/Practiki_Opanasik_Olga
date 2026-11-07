@@ -1,4 +1,3 @@
-"""Классы доступа к данным (по одному на сущность)."""
 from datetime import date
 
 from .db import Database
@@ -27,7 +26,6 @@ class MemberRepository:
             (form.login, password_hash, form.full_name, form.email, form.phone, role))
 
     def end_sessions(self, member_id: int) -> None:
-        """Делает недействительными все выданные этому пользователю cookie сессии."""
         self.db.run("UPDATE members SET session_ver = session_ver + 1 WHERE id = ?", (member_id,))
 
     def count_volunteers(self) -> int:
@@ -38,7 +36,6 @@ class ActionRepository:
     def __init__(self, db: Database):
         self.db = db
 
-    # число заявок считается тем же запросом (LEFT JOIN + GROUP BY), а не отдельным запросом на каждую акцию
     WITH_TAKEN = """SELECT a.*, COUNT(s.id) AS taken FROM actions a
                     LEFT JOIN signups s ON s.action_id = a.id"""
     GROUP = " GROUP BY a.id, a.title, a.category, a.action_date, a.place, a.description, a.needed"
@@ -93,7 +90,6 @@ class SignupRepository:
         return self.db.one("SELECT id FROM signups WHERE member_id = ? AND action_id = ?", (member_id, action_id)) is not None
 
     def count_by_status(self) -> dict:
-        """Количество заявок по всем статусам одним запросом."""
         rows = self.db.all("SELECT status_id, COUNT(*) AS n FROM signups GROUP BY status_id")
         return {r["status_id"]: r["n"] for r in rows}
 

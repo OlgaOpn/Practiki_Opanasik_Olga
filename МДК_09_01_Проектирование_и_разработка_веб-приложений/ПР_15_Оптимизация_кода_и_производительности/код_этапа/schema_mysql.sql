@@ -1,4 +1,3 @@
--- «Добрый город» — схема БД для MySQL 8 (кодировка utf8mb4)
 CREATE TABLE IF NOT EXISTS members (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     login         VARCHAR(24)  NOT NULL UNIQUE,
@@ -56,7 +55,6 @@ CREATE TABLE IF NOT EXISTS login_failures (
     INDEX ix_failures_login (login, created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ПР 15: индексы под частые запросы (в MySQL внешние ключи уже индексированы, добавляем дату акции)
 CREATE INDEX ix_actions_date ON actions (action_date);
 
 INSERT IGNORE INTO signup_statuses (id, name) VALUES (1, 'Новая'), (2, 'Назначено'), (3, 'Завершено');

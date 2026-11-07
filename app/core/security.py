@@ -1,10 +1,3 @@
-"""Подсистема безопасности (ПР № 4).
-
-* хеширование паролей алгоритмом scrypt (стандартная библиотека hashlib);
-* CSRF-токен для каждой формы;
-* разграничение прав по ролям: гость, волонтёр, координатор;
-* ограничение числа неудачных попыток входа.
-"""
 import base64
 import hashlib
 import hmac
@@ -18,7 +11,7 @@ from . import config
 
 
 class PasswordHasher:
-    N, R, P = 2 ** 14, 8, 1               # параметры scrypt: память ~16 МБ на одну проверку
+    N, R, P = 2 ** 14, 8, 1
 
     def hash(self, password: str) -> str:
         salt = secrets.token_bytes(16)
@@ -38,7 +31,6 @@ class PasswordHasher:
 hasher = PasswordHasher()
 
 
-# ---------- CSRF ----------
 def csrf_token(request) -> str:
     if "csrf" not in request.session:
         request.session["csrf"] = secrets.token_urlsafe(32)
@@ -50,9 +42,7 @@ def csrf_valid(request, form) -> bool:
     return bool(sent) and hmac.compare_digest(sent, request.session.get("csrf", ""))
 
 
-# ---------- роли ----------
 def login_required(*roles):
-    """Пускает только вошедших пользователей (и, если указаны, только с нужной ролью)."""
     def decorator(handler):
         @wraps(handler)
         async def wrapper(request):
@@ -67,7 +57,6 @@ def login_required(*roles):
     return decorator
 
 
-# ---------- защита от подбора пароля ----------
 class LoginThrottle:
     def __init__(self, db):
         self.db = db
@@ -78,7 +67,6 @@ class LoginThrottle:
         return f"datetime('now', '-{config.LOGIN_WINDOW_MIN} minutes')"
 
     def blocked(self, login: str, ip: str) -> bool:
-        """Считаем ошибки по паре «логин + IP»: чужие попытки не блокируют владельца аккаунта."""
         row = self.db.one(f"SELECT COUNT(*) AS n FROM login_failures WHERE login = ? AND ip = ? AND created_at > {self._since()}",
                           (login[:24], ip))
         return row["n"] >= config.LOGIN_LIMIT

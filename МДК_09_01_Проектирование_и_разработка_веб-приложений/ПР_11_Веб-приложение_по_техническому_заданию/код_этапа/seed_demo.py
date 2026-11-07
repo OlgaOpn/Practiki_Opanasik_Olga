@@ -1,5 +1,3 @@
-"""Демо-данные: акции, волонтёры, заявки (запускать на пустой базе).
-Пароль у всех волонтёров: Volonter2026"""
 from datetime import date, timedelta
 
 from main import actions, db, hasher, members

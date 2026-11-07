@@ -1,4 +1,3 @@
--- «Добрый город» — схема БД для MySQL 8 (кодировка utf8mb4)
 CREATE TABLE IF NOT EXISTS members (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     login         VARCHAR(24)  NOT NULL UNIQUE,

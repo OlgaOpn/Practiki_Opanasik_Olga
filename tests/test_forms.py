@@ -1,13 +1,3 @@
-"""Автотест форм регистрации и входа «Доброго города» (МДК.05.03, задание 3).
-
-Запускает приложение на временной базе SQLite с демо-данными и отправляет формы
-обычными HTTP-запросами (как браузер с выключенным JavaScript) — проверяется серверная валидация.
-Выполняет 22 из 41 проверки таблицы «Результаты_проверок.xlsx»; проверки, которым нужен
-браузер (маска телефона, подсказки на JavaScript, перенос данных в форме), выполнены вручную.
-Скриншоты не делает. Результаты сохраняет в tests/results.csv.
-
-    python -m unittest tests/test_forms.py -v        (из корня репозитория)
-"""
 import csv
 import http.cookiejar
 import os
@@ -36,7 +26,6 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 class Client:
-    """Мини-браузер: хранит cookie, достаёт CSRF-токен из формы, не следует редиректам."""
     def __init__(self):
         self.jar = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.jar), NoRedirect)
@@ -87,7 +76,6 @@ class FormsTest(unittest.TestCase):
         RESULTS.append([cid, title, expected, actual, "пройден" if ok else "не пройден"])
         self.assertTrue(ok, f"{cid} {title}: {actual}")
 
-    # ---------- регистрация ----------
     def register(self, cid, title, changes, expect_ok, expected, must_contain=None):
         status, headers, html = Client().submit("/register", dict(GOOD, **changes))
         created = status == 303 and headers.get("Location", "").endswith("/login")
@@ -151,7 +139,6 @@ class FormsTest(unittest.TestCase):
         status, _, _ = Client().submit("/register", dict(GOOD, login="auto.r26"), with_csrf=False)
         self.check("Р26", "POST без CSRF-токена", "HTTP 403", f"HTTP {status}", status == 403)
 
-    # ---------- вход ----------
     def login(self, cid, title, login, password, expect_ok, expected):
         status, headers, html = Client().submit("/login", {"login": login, "password": password})
         ok_login = status == 303

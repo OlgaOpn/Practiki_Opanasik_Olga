@@ -1,4 +1,3 @@
--- «Добрый город» — схема БД для SQLite
 CREATE TABLE IF NOT EXISTS members (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     login         VARCHAR(24)  NOT NULL UNIQUE COLLATE NOCASE,
@@ -7,7 +6,7 @@ CREATE TABLE IF NOT EXISTS members (
     email         VARCHAR(120) NOT NULL UNIQUE COLLATE NOCASE,
     phone         VARCHAR(20)  NOT NULL,
     role          VARCHAR(12)  NOT NULL DEFAULT 'volunteer' CHECK (role IN ('volunteer', 'coordinator')),
-    session_ver   INTEGER      NOT NULL DEFAULT 0,   -- растёт при выходе: старые cookie перестают действовать
+    session_ver   INTEGER      NOT NULL DEFAULT 0,
     created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS testimonials (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- журнал неудачных входов (ограничение подбора пароля)
 CREATE TABLE IF NOT EXISTS login_failures (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     login      VARCHAR(24) NOT NULL COLLATE NOCASE,
@@ -54,7 +52,6 @@ CREATE TABLE IF NOT EXISTS login_failures (
 );
 CREATE INDEX IF NOT EXISTS ix_failures_login ON login_failures (login, created_at);
 
--- ПР 15: индексы под частые запросы (фильтр по статусу, подсчёт заявок по акции, афиша по дате)
 CREATE INDEX IF NOT EXISTS ix_signups_action ON signups (action_id);
 CREATE INDEX IF NOT EXISTS ix_signups_status ON signups (status_id);
 CREATE INDEX IF NOT EXISTS ix_actions_date ON actions (action_date);

@@ -1,5 +1,3 @@
-// Проверка форм в браузере, маска телефона, подтверждение удаления.
-// Сервер проверяет всё повторно — эти правила только ускоряют обратную связь.
 (() => {
   const rules = {
     login: v => /^[A-Za-z0-9._-]{3,24}$/.test(v.trim()) || 'Логин: 3–24 символа — латинские буквы, цифры, точка, дефис, подчёркивание',
@@ -28,7 +26,6 @@
     return res === true;
   };
 
-  // маска: из любых цифр собираем +7 (XXX) XXX-XX-XX
   const phone = document.getElementById('phone');
   if (phone) phone.addEventListener('input', () => {
     let d = phone.value.replace(/\D/g, '');
@@ -42,7 +39,6 @@
     const fields = [...form.querySelectorAll('input:not([type=hidden]), select, textarea')];
     fields.forEach(el => {
       el.addEventListener(el.type === 'radio' ? 'change' : 'blur', () => check(form, el));
-      // как только пользователь исправил значение — убираем ошибку сразу, не дожидаясь ухода с поля
       el.addEventListener('input', () => { if (el.closest('.field--error')) check(form, el); });
     });
     form.addEventListener('submit', e => {

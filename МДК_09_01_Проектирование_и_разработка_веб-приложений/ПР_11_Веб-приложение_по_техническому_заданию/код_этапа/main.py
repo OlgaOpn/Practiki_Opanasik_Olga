@@ -1,8 +1,3 @@
-"""«Добрый город» — портал волонтёрских акций.
-
-Запуск:  pip install -r requirements.txt  &&  python main.py   →  http://127.0.0.1:8000
-Координатор по умолчанию: coordinator / Dobro2026!
-"""
 import os
 from datetime import date
 
@@ -52,14 +47,12 @@ def go(url):
 
 
 async def checked_form(request):
-    """Читает форму и проверяет CSRF-токен. Без верного токена — ошибка 403."""
     form = await request.form()
     if not csrf_valid(request, form):
         raise HTTPException(403, "Форма устарела. Обновите страницу и отправьте её снова.")
     return form
 
 
-# ================= гость =================
 async def home(request):
     category = request.query_params.get("category")
     category = category if category in CATEGORIES else None
@@ -90,7 +83,7 @@ async def register(request):
             members.create(form, hasher.hash(form.password))
             flash(request, "ok", "Аккаунт создан. Войдите, чтобы записаться на акцию.")
             return go("/login")
-    data.pop("password", None), data.pop("password2", None)   # пароль обратно в форму не возвращаем
+    data.pop("password", None), data.pop("password2", None)
     return render(request, "register.html", data=data, errors=errors, status_code=400 if errors else 200)
 
 
@@ -106,7 +99,7 @@ async def login(request):
             user = members.by_login(login_value)
             if user and hasher.verify(form.get("password", ""), user["password_hash"]):
                 throttle.reset(login_value)
-                request.session.clear()                       # новая сессия после входа
+                request.session.clear()
                 request.session["uid"] = user["id"]
                 nxt = request.query_params.get("next", "")
                 default = "/coordinator" if user["role"] == "coordinator" else "/cabinet"
@@ -123,7 +116,6 @@ async def logout(request):
     return go("/")
 
 
-# ================= волонтёр =================
 @login_required("volunteer")
 async def cabinet(request):
     items = signups.of_member(request.state.user["id"])
@@ -188,7 +180,6 @@ async def signup_new(request):
                   status_code=400 if errors else 200)
 
 
-# ================= координатор =================
 @login_required("coordinator")
 async def coordinator(request):
     try:
@@ -205,7 +196,6 @@ async def coordinator(request):
 
 @login_required("coordinator")
 async def change_status(request):
-    """Статус меняется только по шагам: Новая → Назначено → Завершено."""
     form = await checked_form(request)
     try:
         signup_id, status_id = int(form.get("signup_id", 0)), int(form.get("status_id", 0))
@@ -268,13 +258,11 @@ async def action_delete(request):
     return go("/coordinator/actions")
 
 
-# ================= ошибки и middleware =================
 async def http_error(request, exc):
     return render(request, "error.html", code=exc.status_code, message=exc.detail, status_code=exc.status_code)
 
 
 class CurrentUserMiddleware:
-    """Кладёт текущего пользователя в request.state.user и добавляет защитные заголовки."""
     def __init__(self, app):
         self.app = app
 
@@ -321,7 +309,6 @@ app = Starlette(routes=routes, middleware=middleware, exception_handlers={HTTPEx
 
 
 def bootstrap() -> None:
-    """Создаёт таблицы и координатора при первом запуске."""
     db.install()
     if not members.by_login("coordinator"):
         class Coordinator:

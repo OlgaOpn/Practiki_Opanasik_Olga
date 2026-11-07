@@ -1,13 +1,10 @@
-"""Демо-данные для свежей базы: 6 акций, 3 волонтёра, 6 заявок, 1 отзыв.
-Запуск из корня репозитория:  python seed_demo.py   (база берётся из DATABASE_URL, по умолчанию SQLite app/dobry_gorod.db)
-Пароль у всех волонтёров: Volonter2026"""
 from datetime import date, timedelta
 
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "app"))
-from main import db, hasher, members  # noqa: E402  (создаёт таблицы и координатора, если их нет)
+from main import db, hasher, members
 
 if db.one("SELECT COUNT(*) AS n FROM actions")["n"]:
     raise SystemExit("В базе уже есть данные — демо-данные не добавлены.")

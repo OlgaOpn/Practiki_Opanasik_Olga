@@ -1,12 +1,3 @@
-"""Запуск итоговой версии «Доброго города» из корня репозитория.
-
-    pip install -r requirements.txt
-    python seed_demo.py          # необязательно: демо-данные в свежую базу
-    python run.py                # http://127.0.0.1:8000
-
-База по умолчанию — SQLite (app/dobry_gorod.db). Для MySQL задайте адрес базы:
-    DATABASE_URL=mysql://dobry:пароль@localhost:3306/dobry_gorod python run.py
-"""
 import argparse
 import sys
 from pathlib import Path
@@ -21,7 +12,7 @@ def main() -> None:
     args = parser.parse_args()
     sys.path.insert(0, str(APP_DIR))
     import uvicorn
-    from main import app          # при импорте создаются таблицы, координатор и сжатая статика
+    from main import app
     print(f"Добрый город: http://{args.host}:{args.port}  (координатор: coordinator / Dobro2026!)")
     uvicorn.run(app, host=args.host, port=args.port)
 

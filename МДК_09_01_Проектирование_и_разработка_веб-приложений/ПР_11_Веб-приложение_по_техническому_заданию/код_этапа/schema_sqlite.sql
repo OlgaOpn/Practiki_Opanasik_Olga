@@ -1,4 +1,3 @@
--- «Добрый город» — схема БД для SQLite
 CREATE TABLE IF NOT EXISTS members (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     login         VARCHAR(24)  NOT NULL UNIQUE COLLATE NOCASE,
@@ -44,7 +43,6 @@ CREATE TABLE IF NOT EXISTS testimonials (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- журнал неудачных входов (ограничение подбора пароля)
 CREATE TABLE IF NOT EXISTS login_failures (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     login      VARCHAR(24) NOT NULL COLLATE NOCASE,

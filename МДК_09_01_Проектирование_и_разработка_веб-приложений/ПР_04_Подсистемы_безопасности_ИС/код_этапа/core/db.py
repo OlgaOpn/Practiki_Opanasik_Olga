@@ -1,8 +1,3 @@
-"""Слой работы с базой данных: SQLite или MySQL.
-
-Все запросы пишутся с плейсхолдером «?» и всегда параметризуются —
-значения никогда не подставляются в текст SQL (защита от SQL-инъекций).
-"""
 import sqlite3
 from datetime import date, datetime
 from decimal import Decimal
@@ -15,16 +10,15 @@ class Database:
     def __init__(self, url: str):
         self.url = url
         self.dialect = "mysql" if url.startswith("mysql") else "sqlite"
-        self.queries = 0                      # счётчик запросов (для отладки)
+        self.queries = 0
 
-    # ---------- соединение ----------
     def connect(self):
         if self.dialect == "sqlite":
             conn = sqlite3.connect(self.url.removeprefix("sqlite:///"))
             conn.row_factory = sqlite3.Row
             conn.execute("PRAGMA foreign_keys = ON")
             return conn
-        import pymysql                        # нужен только при работе с MySQL
+        import pymysql
         u = urlparse(self.url)
         return pymysql.connect(host=u.hostname, port=u.port or 3306, user=unquote(u.username or ""),
                                password=unquote(u.password or ""), database=u.path.lstrip("/"),
@@ -33,7 +27,6 @@ class Database:
     def _sql(self, sql: str) -> str:
         return sql.replace("?", "%s") if self.dialect == "mysql" else sql
 
-    # ---------- запросы ----------
     def all(self, sql: str, params: tuple = ()) -> list[dict]:
         conn = self.connect()
         try:
@@ -46,7 +39,6 @@ class Database:
 
     @staticmethod
     def _row(r) -> dict:
-        """Одинаковые типы для обеих СУБД: MySQL отдаёт даты объектами, SQLite — строками ISO."""
         row = dict(r)
         for k, v in row.items():
             if isinstance(v, datetime):
@@ -62,7 +54,6 @@ class Database:
         return rows[0] if rows else None
 
     def run(self, sql: str, params: tuple = ()) -> int:
-        """INSERT / UPDATE / DELETE. Возвращает id новой строки."""
         conn = self.connect()
         try:
             cur = conn.cursor()
@@ -73,7 +64,6 @@ class Database:
         finally:
             conn.close()
 
-    # ---------- создание таблиц ----------
     def install(self) -> None:
         script = (BASE_DIR / f"schema_{self.dialect}.sql").read_text(encoding="utf-8")
         conn = self.connect()

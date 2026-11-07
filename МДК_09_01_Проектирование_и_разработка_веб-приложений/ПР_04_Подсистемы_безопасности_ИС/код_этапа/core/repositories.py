@@ -1,4 +1,3 @@
-"""Классы доступа к данным (по одному на сущность)."""
 from datetime import date
 
 from .db import Database

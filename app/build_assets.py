@@ -1,10 +1,3 @@
-"""Сборка статики (ПР 15): минификация CSS и JS в static/dist/.
-
-    python build_assets.py
-
-Исходники остаются читаемыми (static/css/style.css, static/js/forms.js),
-браузер получает сжатые файлы app.min.css и app.min.js.
-"""
 import gzip
 import re
 from pathlib import Path
@@ -13,10 +6,10 @@ STATIC = Path(__file__).resolve().parent / "static"
 
 
 def minify_css(css: str) -> str:
-    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)          # комментарии
-    css = re.sub(r"\s+", " ", css)                           # переносы и повторные пробелы
-    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)             # пробелы вокруг { } ; , >
-    css = re.sub(r"([{;])\s*([\w-]+)\s*:\s*", r"\1\2:", css)  # пробел после «свойство:»
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    css = re.sub(r"([{;])\s*([\w-]+)\s*:\s*", r"\1\2:", css)
     css = css.replace(";}", "}")
     return css.strip()
 
@@ -29,7 +22,7 @@ def minify_js(js: str) -> str:
         if not line or line.startswith("//"):
             continue
         lines.append(line)
-    return "\n".join(lines)                                  # переносы строк оставляем — так безопасно для JS
+    return "\n".join(lines)
 
 
 def build() -> dict:

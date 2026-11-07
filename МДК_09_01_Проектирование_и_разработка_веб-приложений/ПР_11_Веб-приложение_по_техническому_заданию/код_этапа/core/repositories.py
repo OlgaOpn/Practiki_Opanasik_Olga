@@ -1,4 +1,3 @@
-"""Классы доступа к данным (по одному на сущность)."""
 from datetime import date
 
 from .db import Database
@@ -118,7 +117,7 @@ class TestimonialRepository:
 
     def latest(self, limit: int = 3):
         rows = self.db.all("SELECT * FROM testimonials ORDER BY created_at DESC LIMIT ?", (limit,))
-        for r in rows:                      # имя автора и акция для каждого отзыва
+        for r in rows:
             info = self.db.one("""SELECT m.full_name, a.title FROM signups s JOIN members m ON m.id = s.member_id
                                   JOIN actions a ON a.id = s.action_id WHERE s.id = ?""", (r["signup_id"],))
             r.update(info or {})

@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Проверка «Доброго города» на MySQL (Ubuntu). Запуск из корня репозитория:
-#     bash check_mysql.sh
-# Нужны: MySQL 8 с базой dobry_gorod и пользователем dobry (см. README), python3 и python3-venv.
-# Итог записывается в mysql_check_result.txt — его и скриншот терминала нужно приложить к отчёту.
 set -u
 DB_USER="${DB_USER:-dobry}"
 DB_PASS="${DB_PASS:-Dobro2026!}"
