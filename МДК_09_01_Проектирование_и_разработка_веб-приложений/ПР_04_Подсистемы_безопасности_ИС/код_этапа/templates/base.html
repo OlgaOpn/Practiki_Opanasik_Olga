@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Добрый город{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="bar">
+  <a class="bar__logo" href="/">Добрый город</a>
+  <nav class="bar__nav">
+    <a href="/">Акции</a>
+    {% if user and user.role == 'coordinator' %}
+      <a href="/coordinator">Заявки</a>
+    {% elif user %}
+      <a href="/cabinet">Мои заявки</a><a href="/signup">Записаться</a>
+    {% endif %}
+    {% if user %}
+      <form method="post" action="/logout" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button class="linkbtn">Выйти ({{ user.login }})</button></form>
+    {% else %}
+      <a href="/login">Вход</a><a href="/register">Регистрация</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="page">
+  {% for kind, text in flashes %}<p class="msg msg--{{ kind }}">{{ text }}</p>{% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<script src="/static/js/forms.js"></script>
+</body>
+</html>

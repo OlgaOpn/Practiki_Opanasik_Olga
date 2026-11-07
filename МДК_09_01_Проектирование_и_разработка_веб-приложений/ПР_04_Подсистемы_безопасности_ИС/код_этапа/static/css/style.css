@@ -1,0 +1,22 @@
+/* ПР 4: временные базовые стили (дизайн появится после ПР 7–8) */
+body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: #222; background: #fafafa; }
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 20px; background: #4b2bb5; }
+.bar a, .linkbtn { color: #fff; text-decoration: none; margin-left: 14px; }
+.bar__logo { font-weight: 700; margin: 0 !important; }
+.linkbtn { background: none; border: 0; font: inherit; cursor: pointer; padding: 0; }
+.inline { display: inline; }
+.page { max-width: 900px; margin: 0 auto; padding: 20px; }
+.item { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
+.item__meta { color: #666; font-size: 14px; margin: 0; }
+.form { max-width: 440px; background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-weight: 600; }
+.field input, .field select, .field textarea { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #aaa; border-radius: 6px; font: inherit; }
+.field small { color: #666; }
+.field__err { display: block; color: #c0262d; font-size: 14px; }
+.field--error input, .field--error select, .field--error textarea { border-color: #c0262d; }
+button { padding: 9px 18px; border: 0; border-radius: 6px; background: #4b2bb5; color: #fff; font: inherit; cursor: pointer; }
+.msg { padding: 10px 14px; border-radius: 6px; background: #eef; }
+.msg--ok { background: #e3f6ec; } .msg--error { background: #fde8e8; }
+.table { width: 100%; border-collapse: collapse; background: #fff; }
+.table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }

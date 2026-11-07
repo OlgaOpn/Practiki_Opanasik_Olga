@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Запись на акцию</h1>
+<form method="post" class="form" novalidate data-validate>
+  <input type="hidden" name="csrf_token" value="{{ csrf }}">
+  <div class="field{% if errors.action_id %} field--error{% endif %}">
+    <label for="action_id">Акция</label>
+    <select id="action_id" name="action_id">
+      <option value="">— выберите —</option>
+      {% for a in actions %}<option value="{{ a.id }}" {% if a.id|string == data.action_id|string %}selected{% endif %}>{{ a.action_date }} · {{ a.title }}</option>{% endfor %}
+    </select>
+    <span class="field__err">{{ errors.get('action_id', '') }}</span>
+  </div>
+  <div class="field{% if errors.task %} field--error{% endif %}">
+    <label for="task">Чем хотите помочь</label>
+    <select id="task" name="task">
+      <option value="">— выберите —</option>
+      {% for t in tasks %}<option {% if t == data.task %}selected{% endif %}>{{ t }}</option>{% endfor %}
+    </select>
+    <span class="field__err">{{ errors.get('task', '') }}</span>
+  </div>
+  <div class="field{% if errors.comment %} field--error{% endif %}">
+    <label for="comment">Комментарий</label>
+    <textarea id="comment" name="comment" rows="3" maxlength="400">{{ data.get('comment', '') }}</textarea>
+    <span class="field__err">{{ errors.get('comment', '') }}</span>
+  </div>
+  <button type="submit">Отправить заявку</button>
+</form>
+{% endblock %}

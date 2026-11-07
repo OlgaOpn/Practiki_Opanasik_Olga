@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Ближайшие акции</h1>
+{% for a in actions %}
+  <article class="item">
+    <p class="item__meta">{{ a.action_date }} · {{ a.category }} · {{ a.place }}</p>
+    <h2>{{ a.title }}</h2>
+    <p>{{ a.description }}</p>
+    <a href="/signup?action={{ a.id }}">Записаться</a>
+  </article>
+{% else %}
+  <p>Пока нет запланированных акций.</p>
+{% endfor %}
+{% endblock %}

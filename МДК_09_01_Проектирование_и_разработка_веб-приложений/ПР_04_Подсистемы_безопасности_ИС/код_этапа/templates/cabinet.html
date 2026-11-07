@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Мои заявки</h1>
+<table class="table">
+  <tr><th>№</th><th>Акция</th><th>Дата</th><th>Чем помогаю</th><th>Статус</th></tr>
+  {% for s in items %}
+  <tr><td>{{ s.id }}</td><td>{{ s.title }}</td><td>{{ s.action_date }}</td><td>{{ s.task }}</td><td>{{ s.status }}</td></tr>
+  {% else %}
+  <tr><td colspan="5">Заявок пока нет — <a href="/signup">запишитесь на акцию</a>.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Заявки волонтёров</h1>
+<table class="table">
+  <tr><th>№</th><th>Волонтёр</th><th>Контакты</th><th>Акция</th><th>Задача</th><th>Статус</th></tr>
+  {% for s in items %}
+  <tr>
+    <td>{{ s.id }}</td><td>{{ s.full_name }}</td><td>{{ s.phone }}<br>{{ s.email }}</td>
+    <td>{{ s.title }}<br><small>{{ s.action_date }}</small></td><td>{{ s.task }}</td>
+    <td>
+      <form method="post" action="/coordinator/status" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="signup_id" value="{{ s.id }}">
+        <select name="status_id">{% for st in statuses %}<option value="{{ st.id }}" {% if st.id == s.status_id %}selected{% endif %}>{{ st.name }}</option>{% endfor %}</select>
+        <button>OK</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

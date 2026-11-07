@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_field.html" import field %}
+{% block content %}
+<h1>Регистрация волонтёра</h1>
+<form method="post" class="form" novalidate data-validate>
+  <input type="hidden" name="csrf_token" value="{{ csrf }}">
+  {{ field('login', 'Логин', data, errors, hint='3–24 символа: латиница, цифры, . _ -', autocomplete='username') }}
+  {{ field('full_name', 'Фамилия и имя', data, errors, placeholder='Иванова Мария', autocomplete='name') }}
+  {{ field('email', 'Электронная почта', data, errors, type='email', autocomplete='email') }}
+  {{ field('phone', 'Телефон', data, errors, type='tel', placeholder='+7 (999) 123-45-67', autocomplete='tel') }}
+  {{ field('password', 'Пароль', data, errors, type='password', hint='от 8 символов, буквы и цифры', autocomplete='new-password') }}
+  {{ field('password2', 'Пароль ещё раз', data, errors, type='password', autocomplete='new-password') }}
+  <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock %}
