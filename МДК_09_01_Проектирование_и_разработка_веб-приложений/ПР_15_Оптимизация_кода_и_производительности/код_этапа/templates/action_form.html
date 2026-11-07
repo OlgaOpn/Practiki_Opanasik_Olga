@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "_field.html" import field %}
+{% block title %}{{ 'Изменить' if action_id else 'Новая' }} акция — Добрый город{% endblock %}
+{% block content %}
+<form method="post" class="panel panel--narrow" novalidate>
+  <h1>{{ 'Изменить акцию' if action_id else 'Новая акция' }}</h1>
+  <input type="hidden" name="csrf_token" value="{{ csrf }}">
+  {{ field('title', 'Название', data, errors) }}
+  <div class="form-grid">
+    <div class="field{% if errors.category %} field--error{% endif %}">
+      <label for="category">Направление</label>
+      <select id="category" name="category"><option value="">Выберите</option>
+        {% for c in categories %}<option {% if c == data.category %}selected{% endif %}>{{ c }}</option>{% endfor %}</select>
+      <span class="field__err">{{ errors.get('category', '') }}</span>
+    </div>
+    {{ field('action_date', 'Дата', data, errors, type='date') }}
+  </div>
+  {{ field('place', 'Место проведения', data, errors) }}
+  <div class="field{% if errors.description %} field--error{% endif %}">
+    <label for="description">Описание</label>
+    <textarea id="description" name="description" maxlength="2000">{{ data.get('description', '') }}</textarea>
+    <span class="field__err">{{ errors.get('description', '') }}</span>
+  </div>
+  {{ field('needed', 'Сколько нужно волонтёров', data, errors, type='number') }}
+  <div class="form-foot"><button class="btn" type="submit">Сохранить</button><a class="muted" href="/coordinator/actions">Отмена</a></div>
+</form>
+{% endblock %}

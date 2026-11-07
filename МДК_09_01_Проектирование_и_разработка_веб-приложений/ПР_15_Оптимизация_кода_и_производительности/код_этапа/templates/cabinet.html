@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "_macros.html" import date_badge, steps, meter, csrf_input %}
+{% block title %}Личный кабинет — Добрый город{% endblock %}
+{% block content %}
+<section class="profile">
+  <span class="avatar">{{ user|initials }}</span>
+  <div><h1>{{ user.full_name }}</h1><p>{{ user.login }} · {{ user.email }} · {{ user.phone }}</p></div>
+  <div class="profile__stats">
+    <div><b>{{ items|length }}</b><span>заявок</span></div>
+    <div><b>{{ items|selectattr('status_id', 'equalto', 3)|list|length }}</b><span>акций завершено</span></div>
+    <div><b>{{ items|selectattr('review')|list|length }}</b><span>отзывов</span></div>
+  </div>
+</section>
+<div class="section-head"><h2>Мои заявки</h2><a class="btn btn--sm" href="/signup">+ Записаться на акцию</a></div>
+{% if items %}
+<div class="list">
+  {% for s in items %}
+  <article class="ticket">
+    {{ date_badge(s.action_date) }}
+    <div>
+      <h3>{{ s.title }}</h3>
+      <p class="ticket__meta"><span>{{ s.place }}</span><span>Задача: {{ s.task }}</span><span>Заявка № {{ s.id }}</span></p>
+      {{ steps(s.status_id, s.status) }}
+      {% if s.review %}<p class="my-review"><span class="stars">{{ '★' * s.rating }}</span> {{ s.review }}</p>{% endif %}
+    </div>
+    <div class="ticket__side">
+      <span class="badge st-{{ s.status_id }}">{{ s.status }}</span>
+      {% if s.status_id == 3 and not s.review %}
+        <a class="btn btn--sun btn--sm" href="/signups/{{ s.id }}/review">Оставить отзыв</a>
+      {% elif s.status_id == 1 %}
+        <form method="post" action="/signups/{{ s.id }}/cancel">{{ csrf_input(csrf) }}<button class="btn btn--danger btn--sm" type="submit">Отменить заявку</button></form>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty panel"><img src="/static/img/empty.svg" alt=""><p>Заявок пока нет. Выберите акцию — и вперёд!</p><a class="btn" href="/">Смотреть акции</a></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,3 @@
+Шрифты Lora (Cyreal) и Inter (Rasmus Andersson) распространяются по лицензии
+SIL Open Font License 1.1 — https://openfontlicense.org
+Файлы в этой папке — подмножества (латиница + кириллица), пересобранные в WOFF.
