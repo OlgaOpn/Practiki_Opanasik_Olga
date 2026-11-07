@@ -22,7 +22,7 @@ python run.py           # http://127.0.0.1:8000
 ```bash
 DATABASE_URL='mysql://dobry:Dobro2026!@localhost:3306/dobry_gorod' python run.py
 ```
-Полная проверка на MySQL (Ubuntu): `bash check_mysql.sh`.
+Полная проверка на MySQL (Ubuntu): `bash check_mysql.sh` — выполнена на MySQL 8.4.11 / Ubuntu 26.04, все 11 сценариев пройдены (отчёт ПР 4, раздел 8).
 
 | Роль | Логин | Пароль |
 |---|---|---|
