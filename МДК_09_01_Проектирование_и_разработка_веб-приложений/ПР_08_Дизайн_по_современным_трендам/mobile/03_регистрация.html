@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="ru"><head>
+  <meta charset="utf-8">
+  <!-- ПР 8: макет мобильной версии (390×844), статический HTML с демонстрационными данными -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF8F3">
+  <title>Макет 390×844 · Регистрация — Добрый город</title>
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/inter-400.woff" as="font" type="font/woff" crossorigin="">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top__row">
+    <a class="logo" href="01_главная.html"><img src="assets/img/logo.svg" alt="" width="40" height="40"><div><b>Добрый город</b><span>волонтёрские акции Москвы</span></div></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="01_главная.html">Акции</a>
+      
+      
+        <a href="04_вход.html">Вход</a>
+        <a class="btn btn--sun btn--sm" href="03_регистрация.html">Стать волонтёром</a>
+      
+    </nav>
+    <a class="btn btn--sun btn--sm top__login" href="04_вход.html">Войти</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    
+    
+<div class="auth">
+  <div class="auth__art">
+    <div><h2>Присоединяйтесь <em class="accent">к доброй команде</em></h2>
+    <p>После регистрации вы сможете записываться на акции, следить за статусом заявок и оставлять отзывы.</p></div>
+    <img src="assets/img/hero.svg" alt="" width="520" height="380">
+  </div>
+  <form method="post" class="auth__form" novalidate="" data-validate="">
+    <h1>Регистрация</h1>
+    <input type="hidden" name="csrf_token" value="">
+    <div class="form-grid">
+      
+<div class="field field--error span-2">
+  <label for="full_name">Фамилия и имя</label>
+  <input id="full_name" name="full_name" type="text" value="Opanasik Olga" placeholder="Иванова Мария" autocomplete="name" aria-describedby="full_name-err">
+  
+  <span class="field__err" id="full_name-err" role="alert">Укажите фамилию и имя русскими буквами</span>
+</div>
+
+      
+<div class="field field--error ">
+  <label for="login">Логин</label>
+  <input id="login" name="login" type="text" value="ol" placeholder="" autocomplete="username" aria-describedby="login-err">
+  <small>3–24 символа: латиница, цифры, . _ -</small>
+  <span class="field__err" id="login-err" role="alert">Логин: 3–24 символа — латинские буквы, цифры, точка, дефис, подчёркивание</span>
+</div>
+
+      
+<div class="field field--error ">
+  <label for="phone">Телефон</label>
+  <input id="phone" name="phone" type="tel" value="8999" placeholder="+7 (999) 123-45-67" autocomplete="tel" aria-describedby="phone-err">
+  
+  <span class="field__err" id="phone-err" role="alert">Телефон в формате +7 (999) 123-45-67</span>
+</div>
+
+      
+<div class="field field--error span-2">
+  <label for="email">Электронная почта</label>
+  <input id="email" name="email" type="email" value="olga@" placeholder="name@mail.ru" autocomplete="email" aria-describedby="email-err">
+  
+  <span class="field__err" id="email-err" role="alert">Почта в формате name@example.ru</span>
+</div>
+
+      
+<div class="field field--error ">
+  <label for="password">Пароль</label>
+  <input id="password" name="password" type="password" value="" placeholder="" autocomplete="new-password" aria-describedby="password-err">
+  <small>от 8 символов, буквы и цифры</small>
+  <span class="field__err" id="password-err" role="alert">Пароль — не короче 8 символов</span>
+</div>
+
+      
+<div class="field ">
+  <label for="password2">Повторите пароль</label>
+  <input id="password2" name="password2" type="password" value="" placeholder="" autocomplete="new-password" aria-describedby="password2-err">
+  
+  <span class="field__err" id="password2-err" role="alert"></span>
+</div>
+
+    </div>
+    <div class="form-foot"><button class="btn" type="submit">Зарегистрироваться</button><span class="muted">Уже с нами? <a href="04_вход.html">Войти</a></span></div>
+  </form>
+</div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <div><b>Добрый город</b><br>Помогаем вместе — по выходным и после работы.</div>
+    <div>Учебный проект · 2026</div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="Меню для смартфона">
+  <a href="01_главная.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"></path></svg>Акции</a>
+  
+  
+    <a href="03_регистрация.html" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M8 12h8"></path></svg>Регистрация</a>
+    <a href="04_вход.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Вход</a>
+  
+</nav>
+<script src="assets/js/forms.js"></script>
+
+</body></html>
